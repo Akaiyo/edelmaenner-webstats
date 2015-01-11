@@ -41,8 +41,10 @@
 
 <body>
     <?php
-        //php init stuff
-        require("pagelist.php");
+        //PHP init
+        require_once("config.php");
+        require_once("pagelist.php");
+        require_once("github.php");
     ?>
 
     <div id="wrapper">

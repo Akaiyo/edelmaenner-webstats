@@ -129,6 +129,19 @@
     background-color: #5bc0de !important;
 }
 
+.timeline-badge.image {
+    background-color: rgba(0,0,0,0) !important;
+}
+
+
+.timeline-badge > img {
+    margin-bottom: 3px;
+    max-width :100%;
+    -moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
 .timeline-title {
     margin-top: 0;
     color: inherit;
