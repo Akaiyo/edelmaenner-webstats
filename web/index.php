@@ -117,7 +117,7 @@
             <?php
                 
                 if(isset($pagelist[$reqpage]))
-                    require($pagelist[$reqpage]->page);
+                    include($pagelist[$reqpage]->page);
             ?>
 
         </div>
