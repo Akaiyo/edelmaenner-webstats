@@ -1,5 +1,27 @@
+ <?php
+        //PHP init
+        define('ROOT_DIR', __DIR__);
+		
+        require_once("config.php");
+        require_once("pagelist.php");
+        require_once("github.php");
+		
+		$reqpage = isset($_GET["page"]) ? $_GET["page"] : "dashboard";
+		if(isset($_GET['page']) && ctype_alnum($_GET['page']))
+		{
+			if(file_exists("pages/" . $reqpage . ".php"))
+			{
+				$reqpage = $_GET['page'];
+			}else{
+				$reqpage = 'dashboard';
+			}
+		}else{
+			$reqpage = 'dashboard';
+		}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
 
@@ -7,16 +29,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Akaiyo, minifisch">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title><?php echo( $cfg['pagetitle'] . ' | ' . $pagelist[$reqpage]->name ); ?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!--MetisMenu CSS-->
     <link href="plugins/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
 
     <!--Timeline CSS-->
     <link href="css/timeline.css" rel="stylesheet">
@@ -40,12 +61,6 @@
 </head>
 
 <body>
-    <?php
-        //PHP init
-        require_once("config.php");
-        require_once("pagelist.php");
-        require_once("github.php");
-    ?>
 
     <div id="wrapper">
 
@@ -72,7 +87,7 @@
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" class="form-control" placeholder="Spieler suchen...">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
@@ -100,8 +115,7 @@
 
             <!-- actual page content-->
             <?php
-                $reqpage = isset($_GET["page"]) ? $_GET["page"] : "dashboard";
-
+                
                 if(isset($pagelist[$reqpage]))
                     require($pagelist[$reqpage]->page);
             ?>

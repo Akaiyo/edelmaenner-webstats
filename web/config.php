@@ -1,6 +1,6 @@
 <?php
 	$cfg = array();
-
+	
 	$cfg["debug"] = true; //display warnings and errors
 
 	//configuration for developer statistics
@@ -11,4 +11,7 @@
 	//$cfg["github_api_ssl_cert_pw"] = ""; //password for the certificate
 	//$cfg["github_api_ssl_key"] = ""; //path to private key ( .pem)
 	//$cfg["github_api_ssl_key_pw"] = ""; //password private key
+	
+	//genereal configuration for the site
+	$cfg['pagetitle'] = 'Edelmänner Webstats';
 ?>
