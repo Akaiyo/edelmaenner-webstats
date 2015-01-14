@@ -12,6 +12,9 @@
 	//$cfg["github_api_ssl_key"] = ""; //path to private key ( .pem)
 	//$cfg["github_api_ssl_key_pw"] = ""; //password private key
 	
-	//genereal configuration for the site
-	$cfg['pagetitle'] = 'Edelmänner Webstats';
+	//general configuration for the site
+	$cfg['pagetitle'] = 'Edelmänner Webstats';#
+	
+	//time in seconds for the cached skins before they get retrieved again from minecraft.net
+	//$cfg['skins_cache_time'] = 21600; // WIRD NOCH NICHT VERWENDET
 ?>
