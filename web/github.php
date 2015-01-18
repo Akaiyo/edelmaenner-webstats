@@ -41,6 +41,7 @@
 
 			$inverted = false;
 
+
 			echo "<ul class='timeline'>";
 
 			$num = count($response);
@@ -49,8 +50,16 @@
 
 					$commit = $value["commit"]["message"];
 					$gitdate = $value["commit"]["committer"]["date"];
-					$user = $value["committer"]["login"];
+					$user = isset($value["committer"]["login"]) ? $value["committer"]["login"] : $value["author"]["login"];
 					$avatar = $value["committer"]["avatar_url"];
+
+
+
+					//If avatar is not set try gravatar
+					if(!isset($avatar)){
+						$hash = md5(strtolower(trim($value["committer"]["gravatar_id"])));
+						$avatar = "http://www.gravatar.com/avatar/" . $hash;
+					}
 
 					$gitdate = new DateTime($gitdate);
 					$now = new DateTime();
@@ -76,7 +85,7 @@
 					echo
 					($inverted ? "<li class='timeline-inverted'>" : "<li>")."
 						<div class='timeline-badge image'>
-							<img src='$avatar' alt=''>
+							<img src='$avatar' alt='$user'>
 						</div>
 						<div class='timeline-panel'>
 							<div class='timeline-heading'>
