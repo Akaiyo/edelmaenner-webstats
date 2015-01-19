@@ -39,7 +39,11 @@
     <meta name="description" content="">
     <meta name="author" content="Akaiyo, minifisch">
 
-    <title><?php echo( $cfg['pagetitle'] . ' | ' . $pagelist[$reqpage]->name ); ?></title>
+    <title>
+        <?php
+            echo( $cfg['pagetitle'] . ' | ' . $pagelist[$reqpage]->name );
+        ?>
+    </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -65,6 +69,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+    <!-- jQuery -->
+    <!-- Move jQuery to the top, but use Javascript when the document is ready -->
+    <script src="plugins/jquery/dist/jquery.min.js"></script>
 
 </head>
 
@@ -95,11 +104,32 @@
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Spieler suchen...">
+                                <!--Player search-->
+                                <script type="text/JavaScript">
+                                    //Register Listeners when Page is ready
+                                    $( document ).ready(function( $ ) {
+                                        $("#player_search_input").keyup(function(event){
+                                            if(event.keyCode == 13){
+                                                $("#player_search_button").click();
+                                            }
+                                        });
+
+                                        $("#player_search_button").click(function(){
+                                            var player = $('#player_search_input').val();
+                                            if(player == "")
+                                                return;
+                                            window.location.href = "?page=player&name=" + player;
+
+                                        });
+                                    });
+                                </script>
+
+                                <input type="text" class="form-control" id="player_search_input" placeholder="Spieler suchen...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button class="btn btn-default" type="button" id = "player_search_button">
                                     <i class="fa fa-search"></i>
                                 </button>
+                                <!-- Player search end -->
                             </span>
                             </div>
                             <!-- /input-group -->
@@ -133,9 +163,6 @@
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="plugins/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
