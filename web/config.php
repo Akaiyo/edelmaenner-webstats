@@ -18,18 +18,8 @@
 	//time in seconds for the cached skins before they get retrieved again from minecraft.net
 	//$cfg['skins_cache_time'] = 21600; // WIRD NOCH NICHT VERWENDET
 
-	//Database configuration
-	$cfg["sql_server"] = "localhost";
-	$cfg["sql_database"] = "edelmaenner";
-	$cfg["sql_user"] = "root";
-	$cfg["sql_password"] = "1611";
-
-	$cfg["sql_cooldown"] = 0;
-
-
-	//Logblock tables
-	$cfg["logblock_tables"] = array("lb-world","lb-world_nether","lb-world_the_end");
-
+	//Include specific sql config
+	include("sql_config.php");
 
 	//Material names
 	$cfg["text"]["material"] = array (
