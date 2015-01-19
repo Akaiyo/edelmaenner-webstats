@@ -464,7 +464,7 @@
 				<ul class="chat">
 					<li class="left clearfix">
 						<span class="chat-img pull-left">
-							<img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+							<img src="" alt="User Avatar" class="img-circle" />
 						</span>
 						<div class="chat-body clearfix">
 							<div class="header">
@@ -480,7 +480,7 @@
 					</li>
 					<li class="right clearfix">
 						<span class="chat-img pull-right">
-							<img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+							<img src="http:// .it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
 						</span>
 						<div class="chat-body clearfix">
 							<div class="header">
@@ -495,7 +495,7 @@
 					</li>
 					<li class="left clearfix">
 						<span class="chat-img pull-left">
-							<img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+							<img src="http:// .it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
 						</span>
 						<div class="chat-body clearfix">
 							<div class="header">
@@ -510,7 +510,7 @@
 					</li>
 					<li class="right clearfix">
 						<span class="chat-img pull-right">
-							<img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+							<img src="http:// .it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
 						</span>
 						<div class="chat-body clearfix">
 							<div class="header">
@@ -528,7 +528,7 @@
 			<!-- /.panel-body -->
 			<div class="panel-footer">
 				<div class="input-group">
-					<input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+					<input id="btn-input" type="text" class="form-control input-sm"  er="Type your message here..." />
 					<span class="input-group-btn">
 						<button class="btn btn-warning btn-sm" id="btn-chat">
 							Send
