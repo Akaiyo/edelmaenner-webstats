@@ -6,13 +6,13 @@ class Skin {
 	{
 		$this->username = $string;
 	}
-	
+
 	private function fetchSkin()
 	{
 		$skin = file_get_contents("https://s3.amazonaws.com/MinecraftSkins/" . $this->username . ".png");
 		return $skin;
 	}
-	
+
 	public function getSkin($not_cached = false)
 	{
 		if($not_cached == true)
@@ -23,14 +23,14 @@ class Skin {
 			{
 				$skin = $this->fetchSkin();
 				file_put_contents('img/skins_cache/' . $this->username . '.png', $skin);
-				return $this->fetchSkin();
+				return $skin;
 			}elseif(!filemtime('img/skins_cache/' . $this->username . '.png') <= time() - 21600){
 				$skin = file_get_contents('img/skins_cache/' . $this->username . '.png');
 				return $skin;
 			}
 		}
 	}
-	
+
 	public function getHeadHelm($size)
 	{
 		$im = imagecreatefromstring($this->getSkin(false));

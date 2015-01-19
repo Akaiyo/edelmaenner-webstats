@@ -7,7 +7,7 @@
 	<div class="col-md-6">
 		<p>
 			In den verschiedenen Toplisten werden die höchsten aber auch auf Wahl die niedriegsten Ergebnisse angezeigt und aufgelistet.<br>
-			Auf der rechten Seite lässt sich die gewünschte Kategorie auswählen. 
+			Auf der rechten Seite lässt sich die gewünschte Kategorie auswählen.
 		</p>
 	</div>
 	<div class="col-md-6">
@@ -19,8 +19,8 @@
 	</div>
 </div>
 
-<!-- 
-	### BLOCKS ### 	
+<!--
+	### BLOCKS ###
 -->
 
 <?php
@@ -57,7 +57,7 @@ $result = mysql_query($sql);
 			</thead>
 			<tbody>
 				<tr>
-					
+
 				</tr>
 			</tbody>
 		</table>
