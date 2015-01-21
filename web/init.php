@@ -14,7 +14,7 @@ function class_autoloader($class) {
 spl_autoload_register('class_autoloader');
 
 
-$url = new SimpleURL("/workspace/edelmaenner-webstats/web");
+$url = new SimpleURL($cfg['baseurl']);
 if(!empty($url->segment(1))){
     if(isset($pagelist[$url->segment(1)])){
         $page = $pagelist[$url->segment(1)];
