@@ -1,28 +1,29 @@
  <?php
-        //PHP init
-        define('ROOT_DIR', __DIR__);
+//PHP init
 
-        require_once("config.php");
-        require_once("pagelist.php");
-        require_once("github.php");
+require_once("config.php");
+require_once("pagelist.php");
+require_once("github.php");
 
-        //Class Autoloader
-        function class_autoloader($class) {
-            include "lib/classes/" . $class . ".class.php";
-        }
+define('SITE_URL', $cfg['pageurl']);
 
-        spl_autoload_register('class_autoloader');
+//Class Autoloader
+function class_autoloader($class) {
+    include "lib/classes/" . $class . ".class.php";
+}
+spl_autoload_register('class_autoloader');
 
-		$reqpage = isset($_GET["page"]) ? $_GET["page"] : "dashboard";
-		if(isset($_GET['page']) && ctype_alnum($_GET['page']))
-		{
-			if(file_exists("pages/" . $reqpage . ".php"))
-			{
-				$reqpage = $_GET['page'];
-			}else{
-				$reqpage = 'dashboard';
-			}
-		}else{
-			$reqpage = 'dashboard';
-		}
+
+$url = new SimpleURL("/workspace/edelmaenner-webstats/web");
+if(!empty($url->segment(1))){
+    if(isset($pagelist[$url->segment(1)])){
+        $page = $pagelist[$url->segment(1)];
+    }else{
+        $page = $pagelist['error_404'];
+        header("HTTP/1.0 404 Not Found");
+    }
+}else{
+    $page = $pagelist['dashboard'];
+}
+
 ?>

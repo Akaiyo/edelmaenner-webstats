@@ -1,12 +1,12 @@
 <?php
-	if(!isset($_GET["name"])){
+	if($url->segment(2) == false){
 			//TODO: Search field or something
 			echo "<p>Kein Spieler ausgewählt</p>";
 			echo "<p>Hänge &name=Spielername an die Abfrage";
 			return;
 	}
 
-	$player = $_GET["name"];
+	$player = $url->segment(2);
 ?>
 
 <div class="row">

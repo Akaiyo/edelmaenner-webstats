@@ -15,6 +15,8 @@
 	//general configuration for the site
 	$cfg['pagetitle'] = 'Edelmänner Webstats';#
 
+	$cfg['pageurl'] = 'http://localhost:88/workspace/edelmaenner-webstats/web/';
+
 	//time in seconds for the cached skins before they get retrieved again from minecraft.net
 	//$cfg['skins_cache_time'] = 21600; // WIRD NOCH NICHT VERWENDET
 

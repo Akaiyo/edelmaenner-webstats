@@ -6,7 +6,8 @@
 <html lang="de">
 
 <head>
-	<base href="http://stats.edelmaenner.net/">
+
+	<base href="<?php echo $cfg['pageurl'] ?>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +16,7 @@
 
     <title>
         <?php
-            echo( $cfg['pagetitle'] . ' | ' . $pagelist[$reqpage]->name );
+            echo( $cfg['pagetitle'] . ' | ' . $page->name );
         ?>
     </title>
 
@@ -66,7 +67,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Edelmänner Webstats</a>
+                <a class="navbar-brand" href="">Edelmänner Webstats</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -92,7 +93,7 @@
                                             var player = $('#player_search_input').val();
                                             if(player == "")
                                                 return;
-                                            window.location.href = "?page=player&name=" + player;
+                                            window.location.href = "player/" + player;
 
                                         });
                                     });
@@ -112,8 +113,11 @@
 
                         <!-- Navbar pages-->
                         <?php
-                            foreach ($pagelist as $key => $value)
-                                echo "<li><a href='?page=$key'><i class='$value->icon'></i>$value->name</a></li>";
+                            foreach ($pagelist as $key => $value){
+                                if($value->icon != false){
+                                    echo '<li><a href="' . SITE_URL . $key . '"><i class="' . $value->icon . '"></i>' . $value->name . '</a></li>';
+                                }
+                            }
                         ?>
                     </ul>
                 </div>
@@ -127,9 +131,7 @@
 
             <!-- actual page content-->
             <?php
-
-                if(isset($pagelist[$reqpage]))
-                    include($pagelist[$reqpage]->page);
+                    include($page->page);
             ?>
 
         </div>
