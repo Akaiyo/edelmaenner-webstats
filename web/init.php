@@ -15,7 +15,8 @@ spl_autoload_register('class_autoloader');
 
 
 $url = new SimpleURL($cfg['baseurl']);
-if(!empty($url->segment(1))){
+$seg_1 = $url->segment(1);
+if(!empty($seq_1)){
     if(isset($pagelist[$url->segment(1)])){
         $page = $pagelist[$url->segment(1)];
     }else{
