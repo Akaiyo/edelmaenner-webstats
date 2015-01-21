@@ -7,6 +7,10 @@ require_once("github.php");
 
 define('SITE_URL', $cfg['pageurl']);
 
+if($cfg['debug'] == true){
+    error_reporting(E_ALL);
+}
+
 //Class Autoloader
 function class_autoloader($class) {
     include "lib/classes/" . $class . ".class.php";
@@ -15,8 +19,8 @@ spl_autoload_register('class_autoloader');
 
 
 $url = new SimpleURL($cfg['baseurl']);
-$seg_1 = $url->segment(1);
-if(!empty($seq_1)){
+
+if(!empty($url->segment(1))){
     if(isset($pagelist[$url->segment(1)])){
         $page = $pagelist[$url->segment(1)];
     }else{
