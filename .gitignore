@@ -38,3 +38,4 @@ Thumbs.dbc
 web/img/skins_cache/
 web/sql_config.php
 web/stats/
+web/.htaccess
