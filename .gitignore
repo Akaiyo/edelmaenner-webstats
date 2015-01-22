@@ -35,5 +35,6 @@
 .Trashes
 ehthumbs.db
 Thumbs.dbc
-web/img/skins_cache
+web/img/skins_cache/
 web/sql_config.php
+web/stats/

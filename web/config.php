@@ -15,7 +15,9 @@
 	//general configuration for the site
 	$cfg['pagetitle'] = 'Edelmänner Webstats';#
 
-
+	$cfg['query_ip'] = '144.76.76.163';
+	$cfg['query_port'] = 25565;
+	$cfg['query_timeout'] = 1;
 
 	//time in seconds for the cached skins before they get retrieved again from minecraft.net
 	//$cfg['skins_cache_time'] = 21600; // WIRD NOCH NICHT VERWENDET

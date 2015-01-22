@@ -2,7 +2,6 @@
 	if($url->segment(2) == false){
 			//TODO: Search field or something
 			echo "<p>Kein Spieler ausgewählt</p>";
-			echo "<p>Hänge &name=Spielername an die Abfrage";
 			return;
 	}
 
