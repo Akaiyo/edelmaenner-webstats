@@ -226,4 +226,16 @@
 		196 => 'Akazienholztür',
 		197 => 'Schwarzeichenholztür'
 	);
+
+	$cfg['text']['settings'] = array(
+		"true" => "Aktiviert",
+		"false" => "Deaktiviert",
+	);
+
+	$cfg['text']['settings']['difficulty'] = array(
+		0 => "Friedlich",
+		1 => "Einfach",
+		2 => "Normal",
+		3 => "Schwer"
+	);
 ?>

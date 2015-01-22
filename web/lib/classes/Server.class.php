@@ -1,25 +1,24 @@
 <?php
 class Server {
 	
-	var $query;
+	var $Query;
+	public $Info;
 
 	function __construct($cfg){
-		$this->query = new MinecraftQuery();
+		$this->Query = new MinecraftQuery();
 		try {
-			$this->query->Connect($cfg['query_ip'], $cfg['query_port'], $cfg['query_timeout']);
+			$this->Query->Connect($cfg['query_ip'], $cfg['query_port'], $cfg['query_timeout']);
+
+			$this->Info = $this->Query->GetInfo();
 		} catch (Exception $exception){
-			echo '<p class="text-danger">Oops! Der Server scheint offline zu sein. Einige Daten können nicht abgerufen werden. :(</p>';
+			echo '<p class="text-danger">Oops! Der Server scheint offline zu sein. Einige Daten konnten nicht abgerufen werden. :(</p>';
 			return;
 		}
 	}
 
-	function GetPlayers(){
-		$info = $this->query->GetInfo();
-		if(!empty($info)){
-			return $info['Players'];
-		} else {
-			return '0';
-		}
+
+	function GetTicks(){
+		return "20";
 	}
 }
 ?>

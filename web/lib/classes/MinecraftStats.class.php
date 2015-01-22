@@ -9,8 +9,11 @@ class MinecraftStats {
 	private $uuid;
 
 	function __construct($uuid) {
-		if(count($uuid) => 32)
-		$this->uuid = $uuid;
+		if(count($uuid) => 32){
+			$this->uuid = $uuid;
+		} else {
+			return false;
+		}
 	}
 
 	function GetSize ($type) {
