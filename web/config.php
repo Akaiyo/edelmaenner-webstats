@@ -228,14 +228,14 @@
 	);
 
 	$cfg['text']['settings'] = array(
-		"true" => "Aktiviert",
-		"false" => "Deaktiviert",
+		"1" => "Aktiviert",
+		"0" => "Deaktiviert",
 	);
 
-	$cfg['text']['settings']['difficulty'] = array(
-		0 => "Friedlich",
-		1 => "Einfach",
-		2 => "Normal",
-		3 => "Schwer"
+	$cfg['text']['difficulty'] = array(
+		"0" => "Friedlich",
+		"1" => "Einfach",
+		"2" => "Normal",
+		"3" => "Schwer"
 	);
 ?>

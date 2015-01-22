@@ -1,6 +1,8 @@
 <?php
 $Server = new Server($cfg);
 $Settings = new MinecraftSettings();
+$McMyAdmin = new McMyAdmin('status', 'gpUzgWMeFbuKEvE2xJcj', '144.76.76.163', '8998');
+$McMyAdminServerStatus = $McMyAdmin->getStatus();
 
 ?>
 
@@ -40,10 +42,29 @@ $Settings = new MinecraftSettings();
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">
-							20
+							<?php echo $McMyAdminServerStatus->cpuusage ?> %
 						</div>
 						<div>
-							Ticks per Seconds
+							CPU-Auslastung
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-server fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">
+							<?php echo $McMyAdminServerStatus->ram . " / " . $McMyAdminServerStatus->maxram ?> MB
+						</div>
+						<div>
+							Speicherauslastung
 						</div>
 					</div>					
 				</div>
@@ -100,7 +121,7 @@ $Settings = new MinecraftSettings();
 				<tbody>
 					<tr>
 						<th>Schwierigkeitsgrad</th>
-						<td><?php echo $cfg['text']['settings']['difficulty'][$Settings->Settings['difficulty']] ?></td>
+						<td><?php echo $cfg['text']['difficulty'][$Settings->Settings['difficulty']]; ?></td>
 					</tr>
 					<tr>
 						<th>Monster</th>
@@ -120,7 +141,7 @@ $Settings = new MinecraftSettings();
 					</tr>
 					<tr>
 						<th>PvP</th>
-						<td><?php echo $Server->Info['Map']; ?></td>
+						<td><?php echo $cfg['text']['settings'][$Settings->Settings['pvp']] ?></td>
 					</tr>
 				</tbody>
 			</table>
