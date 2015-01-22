@@ -19,6 +19,8 @@
 	$cfg['query_port'] = 25565;
 	$cfg['query_timeout'] = 1;
 
+	$cfg["logblock_excludedPlayers"] = array('Fire', 'TNT', 'LavaFlow', 'Creeper', 'Ghast', 'LeavesDecay', 'WaterFlow', 'SnowForm', 'SnowFade', 'NaturalGrow');
+
 	//time in seconds for the cached skins before they get retrieved again from minecraft.net
 	//$cfg['skins_cache_time'] = 21600; // WIRD NOCH NICHT VERWENDET
 
