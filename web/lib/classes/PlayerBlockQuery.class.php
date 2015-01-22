@@ -1,5 +1,5 @@
 <?php
-class BlockQuery{
+class PlayerBlockQuery{
 	private $cfg;
 	private $username;
 	private $interval;
@@ -59,7 +59,9 @@ class BlockQuery{
 				</tr>";
 		}
 
-		echo "</table></div>";
+		echo "</tbody>
+			</table>
+		</div>";
 
 	}
 
