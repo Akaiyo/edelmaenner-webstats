@@ -19,6 +19,11 @@
 	$cfg['query_port'] = 25565;
 	$cfg['query_timeout'] = 1;
 
+	$cfg['mcma_user'] = 'status';
+	$cfg['mcma_password'] = 'gpUzgWMeFbuKEvE2xJcj';
+	$cfg['mcma_host'] = '144.76.76.163';
+	$cfg['mcma_port'] = '8998';
+
 	$cfg["logblock_excludedPlayers"] = array('Fire', 'TNT', 'LavaFlow', 'Creeper', 'Ghast', 'LeavesDecay', 'WaterFlow', 'SnowForm', 'SnowFade', 'NaturalGrow');
 
 	//time in seconds for the cached skins before they get retrieved again from minecraft.net

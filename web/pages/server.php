@@ -1,8 +1,10 @@
 <?php
 $Server = new Server($cfg);
 $Settings = new MinecraftSettings();
-$McMyAdmin = new McMyAdmin('status', 'gpUzgWMeFbuKEvE2xJcj', '144.76.76.163', '8998');
-$McMyAdminServerStatus = $McMyAdmin->getStatus();
+#$McMyAdmin = new McMyAdmin('status', 'gpUzgWMeFbuKEvE2xJcj', '144.76.76.163', '8998');
+#$McMyAdminServerStatus = $McMyAdmin->getStatus();
+
+$data_history = json_encode($Server->GetHistory("timestamp, players, ram"));
 
 ?>
 
@@ -113,38 +115,65 @@ $McMyAdminServerStatus = $McMyAdmin->getStatus();
 </div>
 	<div class="col-md-6">
 		<div class="panel panel-default">
-		<div class="panel-heading">
-			Spieleinstellungen
+			<div class="panel-heading">
+				Spieleinstellungen
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>Schwierigkeitsgrad</th>
+							<td><?php echo $cfg['text']['difficulty'][$Settings->Settings['difficulty']]; ?></td>
+						</tr>
+						<tr>
+							<th>Monster</th>
+							<td><?php echo $cfg['text']['settings'][$Settings->Settings['spawn-monsters']] ?></td>
+						</tr>
+						<tr>
+							<th>NPCs</th>
+							<td><?php echo $cfg['text']['settings'][$Settings->Settings['spawn-npcs']] ?></td>
+						</tr>
+						<tr>
+							<th>Tiere</th>
+							<td><?php echo $cfg['text']['settings'][$Settings->Settings['spawn-animals']] ?></td>
+						</tr>
+						<tr>
+							<th>Sichtweite</th>
+							<td><?php echo $Settings->Settings['view-distance']; ?></td>
+						</tr>
+						<tr>
+							<th>PvP</th>
+							<td><?php echo $cfg['text']['settings'][$Settings->Settings['pvp']] ?></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
-		<div class="panel-body">
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>Schwierigkeitsgrad</th>
-						<td><?php echo $cfg['text']['difficulty'][$Settings->Settings['difficulty']]; ?></td>
-					</tr>
-					<tr>
-						<th>Monster</th>
-						<td><?php echo $cfg['text']['settings'][$Settings->Settings['spawn-monsters']] ?></td>
-					</tr>
-					<tr>
-						<th>NPCs</th>
-						<td><?php echo $cfg['text']['settings'][$Settings->Settings['spawn-npcs']] ?></td>
-					</tr>
-					<tr>
-						<th>Tiere</th>
-						<td><?php echo $cfg['text']['settings'][$Settings->Settings['spawn-animals']] ?></td>
-					</tr>
-					<tr>
-						<th>Sichtweite</th>
-						<td><?php echo $Settings->Settings['view-distance']; ?></td>
-					</tr>
-					<tr>
-						<th>PvP</th>
-						<td><?php echo $cfg['text']['settings'][$Settings->Settings['pvp']] ?></td>
-					</tr>
-				</tbody>
-			</table>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Verlauf
+			</div>
+			<div class="panel-body">				
+				<div id="history_chart" style="position: relative; width:100%; height:300px;">
+				</div>
+			</div>
+			<script type="text/javascript">
+					$(function() {
+
+						Morris.Line({
+							element: 'history_chart',
+							data: <?php echo $data_history ?>,
+							xkey: 'timestamp',
+							ykeys: ['players', 'ram'],
+							labels: ['Spieler', 'RAM'],
+						});
+
+					});
+			</script>
 		</div>
 	</div>
 </div>
