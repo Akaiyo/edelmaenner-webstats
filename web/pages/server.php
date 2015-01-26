@@ -1,10 +1,10 @@
 <?php
 $Server = new Server($cfg);
 $Settings = new MinecraftSettings();
-#$McMyAdmin = new McMyAdmin('status', 'gpUzgWMeFbuKEvE2xJcj', '144.76.76.163', '8998');
-#$McMyAdminServerStatus = $McMyAdmin->getStatus();
+$McMyAdmin = new McMyAdmin('status', 'gpUzgWMeFbuKEvE2xJcj', '144.76.76.163', '8998');
+$McMyAdminServerStatus = $McMyAdmin->getStatus();
 
-$data_history = json_encode($Server->GetHistory("timestamp, players, ram"));
+$data_history = $Server->GetHistory();
 
 ?>
 
@@ -158,20 +158,89 @@ $data_history = json_encode($Server->GetHistory("timestamp, players, ram"));
 				Verlauf
 			</div>
 			<div class="panel-body">				
-				<div id="history_chart" style="position: relative; width:100%; height:300px;">
+				<div id="history_chart_player" style="position: relative; width:100%; height:300px;">
+				</div>
+				<div id="history_chart_ram" style="position: relative; width:100%; height:300px;">
 				</div>
 			</div>
 			<script type="text/javascript">
 					$(function() {
 
-						Morris.Line({
-							element: 'history_chart',
-							data: <?php echo $data_history ?>,
-							xkey: 'timestamp',
-							ykeys: ['players', 'ram'],
-							labels: ['Spieler', 'RAM'],
-						});
+						$('#history_chart_player').highcharts({
+							chart: {
+								zoomType: 'x'
+							},
+							title: {
+								text: 'Spieler'
+							},
+							xAxis: {
+								type: 'datetime',
+								minRange: 60 * 1000
+							},
+							yAxis: {
+								title: {
+									text: 'Spieler'
+								}
+							},
+							plotOptions: {
+								line: {
+									marker: {
+										radius: 2
+									},
+									lineWidth: 2,
+									states: {
+										hover: {
+											lineWidth: 2,
+										}
+									}
+								}
+							},
+							series: [{
+							
+							name: 'Spieler',
+								pointInterval: 60 * 1000,
+								pointStart: <?php echo(strtotime($data_history['timestamp'][0])) * 1000; ?>,
+								data: <?php echo (json_encode($data_history['players'])); ?>,
+							}]
+						})
 
+						$('#history_chart_ram').highcharts({
+							chart: {
+								zoomType: 'x'
+							},
+							title: {
+								text: 'Speicherauslastung'
+							},
+							xAxis: {
+								type: 'datetime',
+								minRange: 60 * 1000
+							},
+							yAxis: {
+								title: {
+									text: 'MB'
+								}
+							},
+							plotOptions: {
+								line: {
+									marker: {
+										radius: 2
+									},
+									lineWidth: 2,
+									states: {
+										hover: {
+											lineWidth: 2,
+										}
+									}
+								}
+							},
+							series: [{
+							
+							name: 'RAM',
+								pointInterval: 60 * 1000,
+								pointStart: <?php echo(strtotime($data_history['timestamp'][0])) * 1000; ?>,
+								data: <?php echo (json_encode($data_history['ram'])); ?>,
+							}]
+						})
 					});
 			</script>
 		</div>

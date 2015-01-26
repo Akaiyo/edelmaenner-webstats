@@ -49,6 +49,7 @@
     <!-- jQuery -->
     <!-- Move jQuery to the top, but use Javascript when the document is ready -->
     <script src="plugins/jquery/dist/jquery.min.js"></script>
+   
 
 </head>
 
@@ -148,10 +149,10 @@
 
     <!-- Morris Charts JavaScript -->
     <script src="plugins/raphael/raphael-min.js"></script>
-    <script src="plugins/morrisjs/morris.min.js"></script>
-    <script src="js/morris-data.js"></script>
 
     <script src="js/sb-admin-2.js"></script>
+
+    <script src="plugins/highcharts/highcharts.js"></script>
 
 </body>
 

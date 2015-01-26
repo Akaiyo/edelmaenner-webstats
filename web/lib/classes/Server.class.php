@@ -27,10 +27,13 @@ class Server {
 
 
 	public function GetHistory($values, $since = ''){
-		$result = $this->sql->query("SELECT " . $this->sql->real_escape_string($values) . " FROM history;");
+		$result = $this->sql->query("SELECT timestamp, players, ram FROM history ");
 		$return = array();
+		$return['timestamp'] = array();
 		while ( $x = $result->fetch_assoc() ){
-			$return[] = $x; 
+			$return['timestamp'][] = $x['timestamp'];
+			$return['players'][] = intval($x['players']);
+			$return['ram'][] = intval($x['ram']);
 		}
 
 		return $return;
