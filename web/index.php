@@ -1,4 +1,5 @@
  <?php
+        $runtime = microtime(true);
         require_once('init.php');
 ?>
 
@@ -59,8 +60,6 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-
-
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -72,6 +71,9 @@
             </div>
             <!-- /.navbar-header -->
 
+            <ul class="nav navbar-top-links navbar-right">
+                    <li><div style="padding: 15px;"><i class="fa fa-user fa-fw"></i></div></li>
+            </ul>
 
             <!-- Navigation begin -->
 
@@ -134,11 +136,15 @@
             <?php
                     include($page->page);
             ?>
-
+            
         </div>
         <!-- /#page-wrapper -->
 
     </div>
+    <div class="footer">
+        <div class="text-right" style="font-size: 0.8em; color: #999999;">Laufzeit: <?php echo(round((microtime(true) - $runtime) * 1000)); ?> ms</div>
+    </div>
+    
     <!-- /#wrapper -->
 
     <!-- Bootstrap Core JavaScript -->

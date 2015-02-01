@@ -26,6 +26,8 @@
 
 	$cfg["logblock_excludedPlayers"] = array('Fire', 'TNT', 'LavaFlow', 'Creeper', 'Ghast', 'LeavesDecay', 'WaterFlow', 'SnowForm', 'SnowFade', 'NaturalGrow');
 
+	$cfg['unnatural_blocks'] = array(0,9,11,34,36,);
+
 	//time in seconds for the cached skins before they get retrieved again from minecraft.net
 	//$cfg['skins_cache_time'] = 21600; // WIRD NOCH NICHT VERWENDET
 
