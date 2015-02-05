@@ -6,18 +6,13 @@
 */
 
 class MinecraftStats {
-	private $uuid;
+	private $sizes;
+	public $WorldSize;
 
-	function __construct($uuid) {
-		if(count($uuid) => 32){
-			$this->uuid = $uuid;
-		} else {
-			return false;
-		}
-	}
+	function __construct(){
+		$this->sizes = explode(":", file_get_contents("stats/stats_sizes.txt"));
 
-	function GetSize ($type) {
-
+		$this->WorldSize = $this->sizes[0];
 	}
 }
 

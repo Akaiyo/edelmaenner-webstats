@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 
-	RewriteBase /workspace/edelmaenner-webstats/web/
+	RewriteBase /edelmaenner-webstats/web/
     RewriteEngine on
 
     #This will stop processing if it's images

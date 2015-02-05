@@ -1,6 +1,7 @@
 <?php
 $Server = new Server($cfg);
 $Settings = new MinecraftSettings();
+$Stats = new MinecraftStats();
 $McMyAdmin = new McMyAdmin('status', 'gpUzgWMeFbuKEvE2xJcj', '144.76.76.163', '8998');
 $McMyAdminServerStatus = $McMyAdmin->getStatus();
 
@@ -36,18 +37,18 @@ $data_history = $Server->GetHistory();
 		</div>
 	</div>
 	<div class="col-lg-3 col-md-6">
-		<div class="panel panel-yellow">
+		<div class="panel panel-red">
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-xs-3">
-						<i class="fa fa-gears fa-5x"></i>
+						<i class="fa fa-database fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">
-							<?php echo $McMyAdminServerStatus->cpuusage ?> %
+							<?php echo NumberUtils::formatBytes($Stats->WorldSize); ?>
 						</div>
 						<div>
-							CPU-Auslastung
+							Größe der Welt
 						</div>
 					</div>					
 				</div>
@@ -63,10 +64,10 @@ $data_history = $Server->GetHistory();
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">
-							<?php echo $McMyAdminServerStatus->ram . " / " . $McMyAdminServerStatus->maxram ?> MB
+							<?php echo $McMyAdminServerStatus->ram . "/" . $McMyAdminServerStatus->maxram ?> MB
 						</div>
 						<div>
-							Speicherauslastung
+							RAM - Auslastung
 						</div>
 					</div>					
 				</div>

@@ -39,6 +39,9 @@
     <!-- Custom Fonts -->
     <link href="plugins/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- DataTables -->
+    <link href="plugins/datatables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -160,6 +163,9 @@
 
     <script src="plugins/highcharts/highcharts.js"></script>
 
+    <script src="plugins/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script src="//cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 </body>
 
 </html>

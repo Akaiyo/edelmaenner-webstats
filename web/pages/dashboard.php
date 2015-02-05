@@ -27,6 +27,9 @@
 				<div class="panel-body">
 					<ul>
 						<li>Spieler lassen sich bereits auf der linken Seite suchen.</li>
+						<li>Topliste der Blöcke</li>
+						<li>Server-Status und Laufzeit</li>
+						<li>Banliste mit Suche</li>
 					</ul>
 				</div>
 			</div>
@@ -38,7 +41,6 @@
 				</div>
 				<div class="panel-body">
 					<ul>
-						<li>Topliste: Blöcke</li>
 						<li>Spieler-Seite per Spieler: Allgemeine Infos + Blöcke</li>
 					</ul>
 				</div>
