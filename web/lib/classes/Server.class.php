@@ -26,8 +26,8 @@ class Server {
 	}
 
 
-	public function GetHistory($values, $since = ''){
-		$result = $this->sql->query("SELECT timestamp, players, ram FROM history ");
+	public function GetHistory(){
+		$result = $this->sql->query("SELECT timestamp, players, ram FROM history WHERE timestamp > date_sub(curdate(), INTERVAL 1 DAY)");
 		$return = array();
 		$return['timestamp'] = array();
 		while ( $x = $result->fetch_assoc() ){
