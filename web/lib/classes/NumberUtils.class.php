@@ -21,5 +21,33 @@
 
 		    return round($bytes, $precision) . ' ' . $units[$pow];
 		}
+
+		public static function parseTime($time = 0){
+			$time = (int)$time;
+			$string = '';
+
+			if($time === 0){
+				return '&lt; 1 Minute';
+			}
+
+			$days = floor($time / 1440);
+			$hours = floor(($time - ($days * 1440))/ 60);
+			$minutes = $time - (($hours * 60) + ($days * 1440));
+
+			$string .= $days;
+			$string .= ($days == 1) ? ' Tag' : ' Tage';
+
+			$string .= ', ';
+
+			$string .= $hours;
+			$string .= ($hours == 1) ? ' Stunde' : ' Stunden';
+
+			$string .= ' und ';
+
+			$string .= $minutes;
+			$string .= ($minutes == 1) ? ' Minute' : ' Minuten';
+
+			return $string;
+		}
 	}
 ?>

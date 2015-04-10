@@ -19,6 +19,7 @@ spl_autoload_register('class_autoloader');
 
 
 $url = new SimpleURL($cfg['baseurl']);
+$sql = new MySQLWrapper($cfg['sql_server'], $cfg['sql_user'], $cfg['sql_password'], $cfg['sql_database']);
 
 if(!empty($url->segment(1))){
     if(isset($pagelist[$url->segment(1)])){

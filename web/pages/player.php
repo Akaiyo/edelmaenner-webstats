@@ -5,23 +5,25 @@
 			return;
 	}
 
-	$player = $url->segment(2);
+	$player = new MinecraftPlayer($sql, $url->segment(2));
+	$stats = $player->GetPlayerStats();
+
 ?>
 
 <div class="row">
 	<div class="col-lg-2">
-		<?php echo "<img src=http://cravatar.eu/3d/". $player ."/512.png>"; ?>
+		<?php echo "<img src=http://cravatar.eu/3d/". $player->name ."/512.png>"; ?>
 	</div>
 	<div class="col-lg-10">
 		<h1 class="page-header">
 			<?php
-				echo "Spieler: $player";
+				echo "$player->name";
 			?>
 		</h1>
 		<div class="row">
 			<div class="col-lg-4">
 				<ul>
-					<li>Platzhalter 1</li>
+					<li>Spielzeit: <?php echo NumberUtils::parseTime($stats['stat.playOneMinute'] / 20 / 60) ?></li>
 					<li>Platzhalter 2</li>
 					<li>Platzhalter 3</li>
 				</ul>
@@ -72,7 +74,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<?php
-			$query = new PlayerBlockQuery($cfg,$player);
+			$query = new PlayerBlockQuery($cfg,$player->name);
 			$query->runQuery();
 			$query->displayBlockList();
 		?>
