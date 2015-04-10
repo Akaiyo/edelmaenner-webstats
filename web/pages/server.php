@@ -157,6 +157,13 @@ $data_history = $Server->GetHistory();
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Verlauf
+				<div style="float: right;">
+					<select id="bandwidth" name="" disabled="disabled">
+						<option value="day">24 Stunden</option>
+						<option value="week">7 Tage</option>
+						<option value="month">1 Monat</option>
+					</select>
+				</div>
 			</div>
 			<div class="panel-body">				
 				<div id="history_chart_player" style="position: relative; width:100%; height:300px;">
