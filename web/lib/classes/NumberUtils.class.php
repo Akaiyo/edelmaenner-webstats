@@ -4,8 +4,9 @@
 		/**
 		* @param number $number to format into Dec format
 		*/
-		public static function formatDecNumber($number) {
-				number_format ( $number , 0 , ',' , '.' );
+		public static function formatDecNumber($number, $dec = 0) {
+				return number_format ( $number , $dec , ',' , '.' );
+
 		}
 
 		public static function formatBytes($bytes, $precision = 2) {

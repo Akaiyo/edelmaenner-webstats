@@ -11,72 +11,67 @@
 ?>
 
 <div class="row">
-	<div class="col-lg-2">
-		<?php echo "<img src=http://cravatar.eu/3d/". $player->name ."/512.png>"; ?>
-	</div>
-	<div class="col-lg-10">
+	<div class="col-lg-12">
 		<h1 class="page-header">
+			<img src="<?php echo "http://cravatar.eu/head/" . $player->name . "/64.png" ?>">
 			<?php
 				echo "$player->name";
 			?>
 		</h1>
-		<div class="row">
-			<div class="col-lg-4">
-				<ul>
-					<li>Spielzeit: <?php echo NumberUtils::parseTime($stats['stat.playOneMinute'] / 20 / 60) ?></li>
-					<li>Platzhalter 2</li>
-					<li>Platzhalter 3</li>
-				</ul>
-			</div>
-			<div class="col-lg-4">
-				<ul>
-					<li>Platzhalter 4</li>
-					<li>Platzhalter 5</li>
-					<li>Platzhalter 6</li>
-				</ul>
-			</div>
-			<div class="col-lg-4">
-				<ul>
-					<li>Platzhalter 7</li>
-					<li>Platzhalter 8</li>
-					<li>Platzhalter 9</li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg-4">
-				<ul>
-					<li>Platzhalter 10</li>
-					<li>Platzhalter 11</li>
-					<li>Platzhalter 12</li>
-				</ul>
-			</div>
-			<div class="col-lg-4">
-				<ul>
-					<li>Platzhalter 13</li>
-					<li>Platzhalter 14</li>
-					<li>Platzhalter 15</li>
-				</ul>
-			</div>
-			<div class="col-lg-4">
-				<ul>
-					<li>Spielerstatistik 16</li>
-					<li>Spielerstatistik 17</li>
-					<li>Spielerstatistik 18</li>
-				</ul>
-			</div>
-		</div>
-
 	</div>
 </div>
 
 <div class="row">
-	<div class="col-md-12">
-		<?php
-			$query = new PlayerBlockQuery($cfg,$player->name);
-			$query->runQuery();
-			$query->displayBlockList();
-		?>
+	<div class="col-lg-4">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table">
+					<tr>
+						<td>Spiele verlassen:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.leaveGame'])); ?></td>
+					</tr>
+					<tr>
+						<td>Spieldauer:</td>
+						<td class="text-right" ><?php echo(NumberUtils::parseTime($stats['stat.playOneMinute']/20 / 60)); ?></td>
+					</tr>
+					<tr>
+						<td>Zugefügter Schaden:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber( floatval( $stats['stat.damageDealt'] / 2 ), 1 ) ); ?> <img src="img/9px_heart.png"></td>
+					</tr>
+					<tr>
+						<td>Erlittener Schaden:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber( floatval( $stats['stat.damageTaken'] / 2 ), 1 ) ); ?> <img src="img/9px_heart.png"></td>
+					</tr>
+					<tr>
+						<td>Tode:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.deaths'])); ?></td>
+					</tr>
+					<tr>
+						<td>Getötete Spieler:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.playerKills'])); ?></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table">
+					<tr></tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="panel panel-default">
+			<div class="panel-body">
+			<div class="text-center">
+				<img src="<?php echo "http://cravatar.eu/3d/" . $player->name . "/500.png" ?>">
+			</div>
+			</div>
+		</div>
 	</div>
 </div>
+
+<?php // echo("<pre> "); var_dump($stats); echo("</pre>"); ?>
