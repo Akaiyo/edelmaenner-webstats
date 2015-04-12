@@ -30,6 +30,7 @@
 						<li>Topliste der Blöcke</li>
 						<li>Server-Status und Laufzeit</li>
 						<li>Banliste mit Suche</li>
+						<li>Spielerseite: Erfolgreiche Einbindung der Minecraft-Statistiken!
 					</ul>
 				</div>
 			</div>
@@ -42,6 +43,7 @@
 				<div class="panel-body">
 					<ul>
 						<li>Spieler-Seite per Spieler: Allgemeine Infos + Blöcke</li>
+						<li>uvm.</li>
 					</ul>
 				</div>
 			</div>
