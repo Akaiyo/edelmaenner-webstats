@@ -55,11 +55,11 @@
 			$units = array('m', 'km');
 			$distance = $distance / 100;
 		    $distance = max($distance, 0); 
-		    $pow = floor(($distance ? log($distance) : 0) / log(1024)); 
+		    $pow = floor(($distance ? log($distance) : 0) / log(1000)); 
 		    $pow = min($pow, count($units) - 1); 
 
 		    // Uncomment one of the following alternatives
-		    $distance /= pow(1024, $pow);
+		    $distance /= pow(1000, $pow);
 		    // $bytes /= (1 << (10 * $pow)); 
 
 		    return round($distance, $precision) . ' ' . $units[$pow];
