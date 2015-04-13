@@ -12,11 +12,19 @@ class MinecraftPlayer {
 		$result = $this->sql->query_one("SELECT * FROM `lb-players` WHERE playername LIKE '" . $this->sql->escape($name) . "'");
 		$this->name = $result['playername'];
 		$this->uuid = $result['UUID'];
+		if(empty($result['playername'])){
+			return false;		
+		}	
+
+		return true;
 	}
 
 	function GetStatsFile() {
-		$content = file_get_contents('stats/players/' . $this->uuid . '.json');
-		return $content;
+		if(!file_exists('stats/players/' . $this->uuid . '.json')){
+			return false;
+		}else{
+			return file_get_contents('stats/players/' . $this->uuid . '.json');
+		}
 	}
 
 	function GetPlayerStats() {

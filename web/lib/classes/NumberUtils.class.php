@@ -50,5 +50,20 @@
 
 			return $string;
 		}
+
+		public static function formatLength($distance, $precision = 2){
+			$units = array('m', 'km');
+			$distance = $distance / 100;
+		    $distance = max($distance, 0); 
+		    $pow = floor(($distance ? log($distance) : 0) / log(1024)); 
+		    $pow = min($pow, count($units) - 1); 
+
+		    // Uncomment one of the following alternatives
+		    $distance /= pow(1024, $pow);
+		    // $bytes /= (1 << (10 * $pow)); 
+
+		    return round($distance, $precision) . ' ' . $units[$pow];
+		
+		}
 	}
 ?>

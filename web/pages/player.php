@@ -6,7 +6,21 @@
 	}
 
 	$player = new MinecraftPlayer($sql, $url->segment(2));
-	$stats = $player->GetPlayerStats();
+	if($player->name == false){
+		?>
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="text-danger">
+					whoops! Der Spieler konnte nicht gefunden werden. :(
+				</h1>
+			</div>
+		</div>
+
+		<?php
+	}
+	else {
+		$stats = $player->GetPlayerStats();
+
 
 ?>
 
@@ -58,7 +72,55 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<table class="table">
-					<tr></tr>
+					<tr>
+						<td>Gelaufene Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.walkOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>Geschlichene Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.crouchOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>Gesprintete Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.sprintOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>Geschwommene Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.swimOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>Gefallene Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.fallOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>Gekletterte Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.climbOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>Geflogene Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.flyOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>Getauchte Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.diveOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>In Lore gefahrene Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.minecartOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>In Boot gefahrene Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.boatOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>Auf Schwein gerittene Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.pigOneCm'])); ?></td>
+					</tr>
+					<tr>
+						<td>Auf Pferd gerittene Strecke</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatLength($stats['stat.horseOneCm'])); ?></td>
+					</tr>
+
 				</table>
 			</div>
 		</div>
@@ -73,5 +135,9 @@
 		</div>
 	</div>
 </div>
+
+<?php
+}
+?>
 
 <?php // echo("<pre> "); var_dump($stats); echo("</pre>"); ?>

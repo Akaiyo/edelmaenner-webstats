@@ -12,7 +12,7 @@
 					Diese Webseite befindet sich zurzeit in Entwicklung!
 				</div>
 				<div class="panel-body">
-					Beachtet bitte, dass sich unsere Statistik-Seite mitten in der Entwicklung befindet. Es können Fehler auftreten.
+					Beachtet bitte, dass sich unsere Statistik-Seite mitten in der Entwicklung befindet.
 				</div>
 			</div>
 		</div>

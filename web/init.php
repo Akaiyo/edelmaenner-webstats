@@ -8,7 +8,7 @@ require_once("github.php");
 define('SITE_URL', $cfg['pageurl']);
 
 if($cfg['debug'] == true){
-    error_reporting(E_ALL);
+    error_reporting(E_ALL & ~E_NOTICE);
 }
 
 //Class Autoloader
