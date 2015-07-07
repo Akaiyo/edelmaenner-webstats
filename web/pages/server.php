@@ -45,7 +45,7 @@ $data_history = $Server->GetHistory();
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">
-							<?php echo NumberUtils::formatBytes($Stats->WorldSize); ?>
+							<?php echo NumberUtils::formatBytes($Stats->GetWorldSize()); ?>
 						</div>
 						<div>
 							Größe der Welt

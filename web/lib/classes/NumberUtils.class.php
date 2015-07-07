@@ -51,6 +51,10 @@
 			return $string;
 		}
 
+		public static function parseDate($date){
+			return date("j. F Y \u\m H:i:s", strtotime($date));
+		}
+
 		public static function formatLength($distance, $precision = 2){
 			$units = array('m', 'km');
 			$distance = $distance / 100;

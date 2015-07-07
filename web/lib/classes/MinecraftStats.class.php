@@ -7,13 +7,28 @@
 
 class MinecraftStats {
 	private $sizes;
-	public $WorldSize;
 
-	function __construct(){
+	function GetWorldSize(){
 		$this->sizes = explode(":", file_get_contents("stats/stats_sizes.txt"));
-
-		$this->WorldSize = $this->sizes[0];
+		return $this->sizes[0];
 	}
+
+	public function GetAllPlayerStats(){
+		$playersOnDisk = scandir("stats/players/");
+		$Players = array();
+		$Exclude = array('.', '..');
+		foreach($playersOnDisk as $Player){
+			if(!in_array($Player, $Exclude)){
+				$uuid = substr($Player, 0, -5);
+				$Players[$uuid] = file_get_contents("stats/players/$Player");
+			
+			}
+		}
+
+		return $Players;
+	}
+
+
 }
 
 ?>

@@ -1,12 +1,52 @@
 <?php
 	if($url->segment(2) == false){
-			//TODO: Search field or something
-			echo "<p>Kein Spieler ausgewählt</p>";
+
+		$Server = new Server($cfg);
+		$Players = new MinecraftPlayers($sql_lb, $cfg);
+
+			?>
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Spieler</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<table class="table">
+								<tr>
+									<td>Spieler online:</td>
+									<td><?php echo($Server->Info['Players']); ?></td>
+								</tr>
+								<tr>
+									<td>Spieler gesamt:</td>
+									<td><?php echo($Players->GetPlayerCount()); ?></td>
+								</tr>
+								<tr>
+									<td>Aktive Spieler (30 Tage):</td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="panel panel-default">
+						<div class="panel-body">
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+			echo('<pre> '); var_dump($Stats->GetAllPlayerStats()); echo('</pre>');
+
 			return;
 	}
 
-	$player = new MinecraftPlayer($sql, $url->segment(2));
-	if($player->name == false){
+	$Player = new MinecraftPlayer($sql_lb, $sql_stats, $url->segment(2));
+
+	if($Player->name == false){
 		?>
 		<div class="row">
 			<div class="col-lg-12">
@@ -19,7 +59,7 @@
 		<?php
 	}
 	else {
-		$stats = $player->GetPlayerStats();
+		$stats = $Player->GetStats();
 
 
 ?>
@@ -27,9 +67,9 @@
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">
-			<img src="<?php echo "http://cravatar.eu/head/" . $player->name . "/64.png" ?>">
+			<img src="<?php echo "http://cravatar.eu/head/" . $Player->name . "/64.png" ?>">
 			<?php
-				echo "$player->name";
+				echo "$Player->name";
 			?>
 		</h1>
 	</div>
@@ -41,13 +81,27 @@
 			<div class="panel-body">
 				<table class="table">
 					<tr>
-						<td>Spiele verlassen:</td>
-						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.leaveGame'])); ?></td>
+						<td>Letzer Login:</td>
+						<td class="text-right" ><?php echo(NumberUtils::parseDate($Player->lastlogin)); ?></td>
+					</tr>
+					<tr>
+						<td>Erster Login:</td>
+						<td class="text-right" ><?php echo(NumberUtils::parseDate($Player->firstlogin)); ?></td>
 					</tr>
 					<tr>
 						<td>Spieldauer:</td>
 						<td class="text-right" ><?php echo(NumberUtils::parseTime($stats['stat.playOneMinute']/20 / 60)); ?></td>
 					</tr>
+					<tr>
+						<td>Spiele verlassen:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.leaveGame'])); ?></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table">
 					<tr>
 						<td>Zugefügter Schaden:</td>
 						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber( floatval( $stats['stat.damageDealt'] / 2 ), 1 ) ); ?> <img src="img/9px_heart.png"></td>
@@ -63,6 +117,30 @@
 					<tr>
 						<td>Getötete Spieler:</td>
 						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.playerKills'])); ?></td>
+					</tr>
+					<tr>
+						<td>Getötete Kreaturen:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.mobKills'])); ?></td>
+					</tr>
+					<tr>
+						<td>Fallen gelassene Gegenstände:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.drop'])); ?></td>
+					</tr>
+					<tr>
+						<td>Kisten geöffnet:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.chestOpened'])); ?></td>
+					</tr>
+					<tr>
+						<td>Enderkisten geöffnet:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.enderchestOpened'])); ?></td>
+					</tr>
+					<tr>
+						<td>Kuchenstückchen gegessen:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.cakeSlicesEaten'])); ?></td>
+					</tr>
+					<tr>
+						<td>Schallplatzen gespielt:</td>
+						<td class="text-right" ><?php echo(NumberUtils::formatDecNumber($stats['stat.recordPlayed'])); ?></td>
 					</tr>
 				</table>
 			</div>
@@ -129,7 +207,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 			<div class="text-center">
-				<img src="<?php echo "http://cravatar.eu/3d/" . $player->name . "/500.png" ?>">
+				<img src="<?php echo "http://cravatar.eu/3d/" . $Player->name . "/500.png" ?>">
 			</div>
 			</div>
 		</div>
@@ -139,5 +217,3 @@
 <?php
 }
 ?>
-
-<?php // echo("<pre> "); var_dump($stats); echo("</pre>"); ?>
