@@ -8,8 +8,9 @@ class Server {
 
 	public $Info;
 
-	function __construct($cfg){
+	function __construct($cfg, $sql){
 		$this->cfg = $cfg;
+		$this->sql = $sql;
 
 		$this->Query = new MinecraftQuery();
 		try {
@@ -21,22 +22,25 @@ class Server {
 			return;
 		}
 
-		$this->sql = new mysqli($cfg["sql_stats_server"], $cfg["sql_stats_user"] ,$cfg["sql_stats_password"] ,$cfg["sql_stats_database"]);
-
 	}
 
 
 	public function GetHistory(){
-		$result = $this->sql->query("SELECT timestamp, players, ram FROM history WHERE timestamp > date_sub(curdate(), INTERVAL 1 DAY)");
+		$result = $this->sql->query_all("SELECT timestamp, players, ram FROM st_history WHERE timestamp > date_sub(curdate(), INTERVAL 1 DAY)");
 		$return = array();
 		$return['timestamp'] = array();
-		while ( $x = $result->fetch_assoc() ){
+		foreach ( $result as $x ){
 			$return['timestamp'][] = $x['timestamp'];
 			$return['players'][] = intval($x['players']);
 			$return['ram'][] = intval($x['ram']);
 		}
 
 		return $return;
+	}
+
+	public function GetWorldSize(){
+		$this->sizes = explode(":", file_get_contents("stats/stats_sizes.txt"));
+		return $this->sizes[0];
 	}
 }
 ?>

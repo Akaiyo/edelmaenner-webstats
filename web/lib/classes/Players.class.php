@@ -1,6 +1,6 @@
 <?php
 
-class MinecraftPlayers {
+class Players {
 	protected $sql;
 	private $playerarray;
 	private $players;

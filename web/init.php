@@ -19,8 +19,7 @@ spl_autoload_register('class_autoloader');
 
 
 $url = new SimpleURL($cfg['baseurl']);
-$sql_lb = new MySQLWrapper($cfg['sql_server'], $cfg['sql_user'], $cfg['sql_password'], $cfg['sql_database']);
-$sql_stats = new MySQLWrapper($cfg['sql_stats_server'], $cfg['sql_stats_user'], $cfg['sql_stats_password'], $cfg['sql_stats_database']);
+$sql = new MySQLWrapper($cfg['sql_server'], $cfg['sql_user'], $cfg['sql_password'], $cfg['sql_database']);
 
 if(!empty($url->segment(1))){
     if(isset($pagelist[$url->segment(1)])){

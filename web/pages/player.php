@@ -2,7 +2,7 @@
 	if($url->segment(2) == false){
 
 		$Server = new Server($cfg);
-		$Players = new MinecraftPlayers($sql_lb, $cfg);
+		$Players = new Players($sql, $cfg);
 
 			?>
 			<div class="row">
@@ -39,12 +39,11 @@
 				</div>
 			</div>
 			<?php
-			echo('<pre> '); var_dump($Stats->GetAllPlayerStats()); echo('</pre>');
 
 			return;
 	}
 
-	$Player = new MinecraftPlayer($sql_lb, $sql_stats, $url->segment(2));
+	$Player = new Player($sql, $url->segment(2));
 
 	if($Player->name == false){
 		?>
@@ -59,7 +58,7 @@
 		<?php
 	}
 	else {
-		$stats = $Player->GetStats();
+		$stats = $Player->raw;
 
 
 ?>
@@ -215,5 +214,8 @@
 </div>
 
 <?php
+
+var_dump($Player->GetBlocks());
+
 }
 ?>

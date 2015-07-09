@@ -18,8 +18,8 @@
 
 	}else{
 
-		$Stats = new StatsToplist($sql_stats);
-		$result = $Stats->GetOrdered('stat.playOneMinute');
+		$Stats = new PageToplist($sql_stats);
+		$result = $Stats->GetOrderedList('stat.playOneMinute');
 
 		?>
 
@@ -32,16 +32,21 @@
 							<tr>
 								<th>#</th>
 								<th>Name</th>
-								<th>Ergebnis</th>
+								<th>Spielzeit</th>
+								<th>Blöcke zerstört</th>
+								<th>Blöcke gebaut</th>
+								<th>Kreaturen getötet</th>
+								<th>Gegenstände weggeworfen</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
 							$x = 1;
 							foreach($result as $record){
+								$playername = $Players->GetPlayerNameByUUID($record['uuid']);
 								echo("<tr>");
 								echo("<td>" . $x . "</td>");
-								echo("<td>" . $Players->GetPlayerNameByUUID($record['uuid']) . "</td>");
+								echo('<td><img src="http://cravatar.eu/avatar/' . $playername . '/16.png"> <a href="' . SITE_URL . 'player/' . $playername . '">' . $playername . '</a></td>');
 								echo("<td>" . NumberUtils::parseTime($record['stat.playOneMinute']/20 / 60) . "</td>");
 								echo("</tr>");
 								$x++;

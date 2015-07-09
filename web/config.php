@@ -13,7 +13,7 @@
 	//$cfg["github_api_ssl_key_pw"] = ""; //password private key
 
 	//general configuration for the site
-	$cfg['pagetitle'] = 'Edelmänner Webstats';#
+	$cfg['pagetitle'] = 'edelmaenner.net | Statistiken';#
 
 	$cfg['query_ip'] = '144.76.76.163';
 	$cfg['query_port'] = 25565;
@@ -26,7 +26,7 @@
 
 	$cfg["logblock_excludedPlayers"] = array('Fire', 'TNT', 'LavaFlow', 'Creeper', 'Ghast', 'LeavesDecay', 'WaterFlow', 'SnowForm', 'SnowFade', 'NaturalGrow', 'dummy_record');
 
-	$cfg['unnatural_blocks'] = array(0,9,11,34,36,);
+	$cfg['unnatural_blocks'] = array(0,9,11,34,36);
 
 
 	//time in seconds for the cached skins before they get retrieved again from minecraft.net

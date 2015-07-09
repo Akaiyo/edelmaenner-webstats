@@ -1,7 +1,6 @@
 <?php
-$Server = new Server($cfg);
+$Server = new Server($cfg, $sql);
 $Settings = new MinecraftSettings();
-$Stats = new MinecraftStats();
 $McMyAdmin = new McMyAdmin('status', 'gpUzgWMeFbuKEvE2xJcj', '144.76.76.163', '8998');
 $McMyAdminServerStatus = $McMyAdmin->getStatus();
 
@@ -45,7 +44,7 @@ $data_history = $Server->GetHistory();
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">
-							<?php echo NumberUtils::formatBytes($Stats->GetWorldSize()); ?>
+							<?php echo NumberUtils::formatBytes($Server->GetWorldSize()); ?>
 						</div>
 						<div>
 							Größe der Welt
