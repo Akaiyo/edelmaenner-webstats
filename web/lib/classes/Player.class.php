@@ -2,6 +2,7 @@
 
 class Player {
 	protected $sql;
+	protected $cfg;
 
 	public $uuid;
 	public $name;
@@ -10,9 +11,10 @@ class Player {
 	public $firstlogin;
 	public $playerid;
 
-	function __construct ($sql, $string){
+	function __construct ($sql, $cfg, $string){
 
 		$this->sql = $sql;
+		$this->cfg = $cfg;
 
 
 		if(strlen($string) > 16){
@@ -34,7 +36,7 @@ class Player {
 		if($result){
 
 			$this->raw = $result;
-			$this->uuid = $result['UUID'];
+			$this->uuid = $result['uuid'];
 			$this->name = $result['playername'];
 			$this->firstlogin = $result['firstlogin'];
 			$this->lastlogin = $result['lastlogin'];
@@ -51,38 +53,44 @@ class Player {
 	}
 
 	function GetBlocks(){
-		$sum['destroyed'] = 0;
-		$sum['placed'] = 0;
-		$sum['moved'] = 0;
 
-		$blocks = $this->GetDetailedBlocks();
-
-		foreach ($blocks as $value) {
-			if($value['type'] == 0){
-				$sum['destroyed']++;
-			} else {
-				$sum['placed']++;
-			}
-		}
-
-		$sum['moved'] = $sum['placed'] + $sum['destroyed'];
-
-		return $sum;
 
 	}
 
-	function GetDetailedBlocks(){
+	function GetDetailedBlocks($interval){
 
-		$result_world = $this->sql->query_all("SELECT replaced, type FROM `lb-world` WHERE playerid='" . $this->playerid . "';");
-		$result_world_nether = $this->sql->query_all("SELECT replaced, type FROM `lb-world` WHERE playerid='" . $this->playerid . "';");
-		$result_world_the_end = $this->sql->query_all("SELECT replaced, type FROM `lb-world` WHERE playerid='" . $this->playerid . "';");
+		$dateClause = $interval != "" ? "AND date > date_sub(now(),INTERVAL 1 $interval)" : "";
+		$tables = $this->cfg['logblock_tables'];
+		$player = $this->name;
 
-		$result= array_merge($result_world, $result_world_nether, $result_world_the_end);
-
-		echo(memory_get_usage(true));
+		$sql = 'SELECT type, SUM(created) AS created, SUM(destroyed) AS destroyed FROM (';
+		for ($i = 0; $i < count($tables); $i++) {
+   			$sql .= "(SELECT type, count(type) AS created, 0 AS destroyed FROM `$tables[$i]` INNER JOIN `lb-players` USING (playerid) WHERE playername = '$player' AND type > 0 AND type != replaced $dateClause GROUP BY type) UNION (SELECT replaced AS type, 0 AS created, count(replaced) AS destroyed FROM `$tables[$i]` INNER JOIN `lb-players` USING (playerid) WHERE playername = '$player' AND replaced > 0 AND type != replaced $dateClause GROUP BY replaced)";
+			if ($i < count($tables) - 1)
+				$sql .= ' UNION ';
+		}
+   		$sql .= ') AS t GROUP BY type ORDER BY SUM(created) + SUM(destroyed) DESC';
+		
+		$result = $this->sql->query_all($sql);
 
 		return $result;
-	
+
+	}
+
+	function GetDetailedBlocksTable($result){
+		$html = "";$x = 1;
+		foreach($result as $row){
+			
+			$html .= "<tr>";
+			$html .= "<td>" . $x . ".</td>";
+			$html .= '<td><img src="' . SITE_URL . '/img/blocks/' . $row['type'] . '.png"> ' . $this->cfg['text']['material'][$row['type']] . "</td>";
+			$html .= "<td>" . NumberUtils::formatDecNumber($row['created']) . "</td>";
+			$html .= "<td>" . NumberUtils::formatDecNumber($row['destroyed']) . "</td>";
+			$html .= "<td>" . NumberUtils::formatDecNumber(($row['created'] + $row['destroyed'])) . "</td>";
+			$x++;
+		}
+
+		return $html;
 	}
 
 

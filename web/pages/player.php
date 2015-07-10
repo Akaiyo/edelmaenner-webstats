@@ -43,7 +43,7 @@
 			return;
 	}
 
-	$Player = new Player($sql, $url->segment(2));
+	$Player = new Player($sql, $cfg, $url->segment(2));
 
 	if($Player->name == false){
 		?>
@@ -79,6 +79,10 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<table class="table">
+					<tr>
+						<td>UUID:</td>
+						<td class="text-right" onClick="this.select();"><?php echo($Player->uuid); ?></td>
+					</tr>
 					<tr>
 						<td>Letzer Login:</td>
 						<td class="text-right" ><?php echo(NumberUtils::parseDate($Player->lastlogin)); ?></td>
@@ -212,10 +216,28 @@
 		</div>
 	</div>
 </div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table">
+					<tr>
+						<th>#</th>
+						<th>Block</th>
+						<th>Gebaut</th>
+						<th>Abgebaut</th>
+						<th>Summe</th>
+					</tr>
+					<?php echo($Player->GetDetailedBlocksTable($Player->GetDetailedBlocks(""))); ?>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 
 <?php
 
-var_dump($Player->GetBlocks());
+
 
 }
 ?>
