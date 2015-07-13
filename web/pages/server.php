@@ -1,5 +1,5 @@
 <?php
-$Server = new Server($cfg, $sql);
+$Server = new Server($sql, $cfg);
 $Settings = new MinecraftSettings();
 $McMyAdmin = new McMyAdmin('status', 'gpUzgWMeFbuKEvE2xJcj', '144.76.76.163', '8998');
 $McMyAdminServerStatus = $McMyAdmin->getStatus();

@@ -8,7 +8,7 @@ class Server {
 
 	public $Info;
 
-	function __construct($cfg, $sql){
+	function __construct($sql, $cfg){
 		$this->cfg = $cfg;
 		$this->sql = $sql;
 

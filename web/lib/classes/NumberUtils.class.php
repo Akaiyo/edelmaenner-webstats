@@ -24,7 +24,7 @@
 		}
 
 		public static function parseTime($time = 0){
-			$time = (int)$time;
+			$time = (int) $time;
 			$string = '';
 
 			if($time === 0){
