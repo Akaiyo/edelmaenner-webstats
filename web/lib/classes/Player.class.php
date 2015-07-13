@@ -57,7 +57,18 @@ class Player {
 
 	}
 
-	function GetDetailedBlocks($interval){
+	function GetBlockCount($interval = ""){
+		$dateClause = $interval != "" ? "AND date > date_sub(now(),INTERVAL 1 $interval)" : "";
+		$tables = $this->cfg['logblock_tables'];
+		$player = $this->name;
+
+		$result_world = $this->sql->query_one('SELECT count(*) as count FROM `lb-world` WHERE type != 0 AND replaced > 0 AND playerid = ' . $this->playerid);
+		
+		
+
+	}
+
+	function GetDetailedBlocks($interval = ""){
 
 		$dateClause = $interval != "" ? "AND date > date_sub(now(),INTERVAL 1 $interval)" : "";
 		$tables = $this->cfg['logblock_tables'];
@@ -79,16 +90,27 @@ class Player {
 
 	function GetDetailedBlocksTable($result){
 		$html = "";$x = 1;
-		foreach($result as $row){
-			
+		$sumCreated=0;
+		$sumDestroyed=0;
+		foreach($result as $row){			
 			$html .= "<tr>";
-			$html .= "<td>" . $x . ".</td>";
-			$html .= '<td><img src="' . SITE_URL . '/img/blocks/' . $row['type'] . '.png"> ' . $this->cfg['text']['material'][$row['type']] . "</td>";
-			$html .= "<td>" . NumberUtils::formatDecNumber($row['created']) . "</td>";
-			$html .= "<td>" . NumberUtils::formatDecNumber($row['destroyed']) . "</td>";
-			$html .= "<td>" . NumberUtils::formatDecNumber(($row['created'] + $row['destroyed'])) . "</td>";
+			$html .= '<td class="text-right">' . $x . ".</td>";
+			$html .= '<td class="text-left"><img src="' . SITE_URL . '/img/blocks/' . $row['type'] . '.png"> ' . $this->cfg['text']['material'][$row['type']] . "</td>";
+			$html .= '<td class="text-right">' . NumberUtils::formatDecNumber($row['created']) . "</td>";
+			$html .= '<td class="text-right">' . NumberUtils::formatDecNumber($row['destroyed']) . "</td>";
+			$html .= '<td class="text-right">' . NumberUtils::formatDecNumber(($row['created'] + $row['destroyed'])) . "</td>";
 			$x++;
+
+			$sumCreated += $row['created'];
+			$sumDestroyed += $row['destroyed'];
 		}
+
+		$html .= "<tr>";
+		$html .= '<th colspan="2">Summe:</th>';
+		$html .= '<th class="text-right">' . NumberUtils::formatDecNumber($sumCreated) . "</th>";
+		$html .= '<th class="text-right">' . NumberUtils::formatDecNumber($sumDestroyed) . "</th>";
+		$html .= '<th class="text-right">' . NumberUtils::formatDecNumber($sumCreated + $sumDestroyed) . "</th>";
+		$html .= "</tr>";
 
 		return $html;
 	}

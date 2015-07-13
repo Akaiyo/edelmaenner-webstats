@@ -1,7 +1,7 @@
 <?php
 	if($url->segment(2) == false){
 
-		$Server = new Server($cfg);
+		$Server = new Server($sql, $cfg);
 		$Players = new Players($sql, $cfg);
 
 			?>
@@ -11,7 +11,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-4">
+				<div class="col-lg-6">
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<table class="table">
@@ -25,15 +25,22 @@
 								</tr>
 								<tr>
 									<td>Aktive Spieler (30 Tage):</td>
-									<td></td>
+									<td><?php echo($Players->GetActivePlayerCount()); ?></td>
 								</tr>
 							</table>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-8">
+				<div class="col-lg-6">
 					<div class="panel panel-default">
 						<div class="panel-body">
+							<table class="table table-striped">
+								<tr>
+									<th>Spieler</th>
+									<th>letzer Login</th>
+								</tr>
+								<?php echo $Players->GetLastPlayerTable(); ?>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -220,13 +227,13 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<table class="table">
+				<table class="table table-striped">
 					<tr>
 						<th>#</th>
 						<th>Block</th>
-						<th>Gebaut</th>
-						<th>Abgebaut</th>
-						<th>Summe</th>
+						<th class="text-right">Gebaut</th>
+						<th class="text-right">Abgebaut</th>
+						<th class="text-right">Summe</th>
 					</tr>
 					<?php echo($Player->GetDetailedBlocksTable($Player->GetDetailedBlocks(""))); ?>
 				</table>
